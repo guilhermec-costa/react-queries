@@ -1,4 +1,5 @@
-export const POSTS: Post[] = [
+// eslint-disable-next-line prefer-const
+export let POSTS: Post[] = [
   {
     id: 1,
     title: "Como melhorar a performance de aplicações React",
