@@ -5,6 +5,8 @@ import { usePostAuthor, usePostData } from "./queries/use-some-data";
 import { debounce } from "lodash";
 import PostForm from "./components/PostForm";
 import useDogsData from "./queries/use-dogs-data";
+import useInfiniteDogScroll from "./queries/use-infinite-dog-scroll";
+import Dog from "./components/Dog";
 
 function App() {
   const [currentPage, setCurrentPage] = React.useState<number>(1);
@@ -14,7 +16,7 @@ function App() {
     authorFilter: postAuthorFilter,
   });
   const dogQuery = useDogsData(currentPage);
-  console.log(dogQuery.data);
+  const infiniteDogQuery = useInfiniteDogScroll();
 
   const debouncedSetFilter = useCallback(
     debounce((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,6 +25,17 @@ function App() {
     }, 500),
     []
   );
+
+  const handleNextScrollChunk = () => {
+    console.log(infiniteDogQuery.hasNextPage)
+    if(infiniteDogQuery.hasNextPage) {
+      infiniteDogQuery.fetchNextPage({});
+    }
+  }
+
+  React.useEffect(() => {
+    console.log(infiniteDogQuery.data?.pages.flatMap((page) => page.data));
+  }, [infiniteDogQuery.data])
 
   if (isLoading) return <OnLoading />;
   if (error) return <div>{JSON.stringify(error.message)}</div>;
@@ -55,38 +68,9 @@ function App() {
       )}
       <PostForm />
       <hr></hr>
-      <h2>Paginated data</h2>
+      <h1>Paginated data</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
-        {dogQuery.data &&
-          dogQuery.data.data.map((dog) => {
-            return (
-              <div
-                key={dog.id}
-                className="bg-white shadow-md rounded-2xl p-4 border border-gray-200"
-              >
-                <h2 className="text-xl font-semibold mb-1">{dog.nome}</h2>
-                <p className="text-gray-600">Raça: {dog.raca}</p>
-                <p className="text-gray-600">Idade: {dog.idade} ano(s)</p>
-                <p className="text-gray-600">Peso: {dog.pesoKg} kg</p>
-                <div className="mt-2">
-                  <span className="font-medium">Vacinas:</span>
-                  <ul className="list-disc ml-5 text-sm text-gray-700">
-                    {dog.vacinas.map((vacina, index) => (
-                      <li key={index}>{vacina}</li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="mt-3 text-sm text-gray-500">
-                  <p>
-                    <strong>Dono:</strong> {dog.dono.nome}
-                  </p>
-                  <p>
-                    <strong>Contato:</strong> {dog.dono.telefone}
-                  </p>
-                </div>
-              </div>
-            );
-          })}
+        {dogQuery.data && dogQuery.data.data.map((dog) => <Dog dog={dog}/>)}
       </div>
       <div className="flex justify-center gap-2 mt-6 flex-wrap">
         {dogQuery.data?.first && (
@@ -126,6 +110,12 @@ function App() {
           Page {currentPage} of {dogQuery.data?.pages}
         </div>
       </div>
+      <hr></hr>
+      <h1>Infinite scroll data</h1>
+      {infiniteDogQuery.data?.pages && 
+        infiniteDogQuery.data?.pages.flatMap((page) => page.data.map((dog) => <Dog dog={dog}/>))
+      }
+      <button onClick={handleNextScrollChunk}>Query Next chunk</button>
     </>
   );
 }
