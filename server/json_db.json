@@ -1,0 +1,124 @@
+{
+  "dogs": [
+    {
+      "id": 1,
+      "nome": "Rex",
+      "raca": "Labrador Retriever",
+      "idade": 4,
+      "pesoKg": 30.5,
+      "vacinas": ["Raiva", "V8", "Giárdia"],
+      "dono": {
+        "nome": "João Silva",
+        "telefone": "11987654321"
+      }
+    },
+    {
+      "id": 2,
+      "nome": "Luna",
+      "raca": "Poodle",
+      "idade": 2,
+      "pesoKg": 6.2,
+      "vacinas": ["Raiva", "V10"],
+      "dono": {
+        "nome": "Ana Souza",
+        "telefone": "21912345678"
+      }
+    },
+    {
+      "id": 3,
+      "nome": "Thor",
+      "raca": "Vira-lata",
+      "idade": 5,
+      "pesoKg": 18.7,
+      "vacinas": ["Raiva", "Giárdia"],
+      "dono": {
+        "nome": "Carlos Lima",
+        "telefone": "31998765432"
+      }
+    },
+    {
+      "id": 4,
+      "nome": "Mel",
+      "raca": "Shih Tzu",
+      "idade": 3,
+      "pesoKg": 5.5,
+      "vacinas": ["Raiva", "V10", "Leptospirose"],
+      "dono": {
+        "nome": "Patrícia Mendes",
+        "telefone": "11912341234"
+      }
+    },
+    {
+      "id": 5,
+      "nome": "Toby",
+      "raca": "Beagle",
+      "idade": 6,
+      "pesoKg": 12.3,
+      "vacinas": ["Raiva", "V8"],
+      "dono": {
+        "nome": "Fernando Rocha",
+        "telefone": "21987659876"
+      }
+    },
+    {
+      "id": 6,
+      "nome": "Nina",
+      "raca": "Bulldog Francês",
+      "idade": 1,
+      "pesoKg": 9.1,
+      "vacinas": ["Raiva", "Giárdia", "V10"],
+      "dono": {
+        "nome": "Luciana Castro",
+        "telefone": "31911223344"
+      }
+    },
+    {
+      "id": 7,
+      "nome": "Bob",
+      "raca": "Golden Retriever",
+      "idade": 7,
+      "pesoKg": 34.0,
+      "vacinas": ["Raiva", "V10", "Giárdia", "Leptospirose"],
+      "dono": {
+        "nome": "Rafael Alves",
+        "telefone": "11955443322"
+      }
+    },
+    {
+      "id": 8,
+      "nome": "Maggie",
+      "raca": "Yorkshire Terrier",
+      "idade": 2,
+      "pesoKg": 3.2,
+      "vacinas": ["Raiva", "V8"],
+      "dono": {
+        "nome": "Sofia Martins",
+        "telefone": "21999887766"
+      }
+    },
+    {
+      "id": 9,
+      "nome": "Apolo",
+      "raca": "Husky Siberiano",
+      "idade": 4,
+      "pesoKg": 25.7,
+      "vacinas": ["Raiva", "V10", "Parvovirose"],
+      "dono": {
+        "nome": "Igor Ribeiro",
+        "telefone": "31955667788"
+      }
+    },
+    {
+      "id": 10,
+      "nome": "Fiona",
+      "raca": "Dachshund",
+      "idade": 3,
+      "pesoKg": 7.4,
+      "vacinas": ["Raiva", "V8", "Giárdia"],
+      "dono": {
+        "nome": "Amanda Fernandes",
+        "telefone": "11988776655"
+      }
+    }
+  ]
+}

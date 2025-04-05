@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { wait } from "../util";
 import { POSTS } from "../data-util";
 
@@ -10,10 +10,11 @@ interface UsePostsProps {
   authorFilter?: string;
 }
 
-export function useSomeData({ waitTime = 2000 }: UseSomeDataProps) {
+export function usePostData({ waitTime = 2000 }: UseSomeDataProps) {
   return useQuery({
     queryKey: ["posts"],
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    placeholderData: keepPreviousData,
     queryFn: async ({queryKey}) => wait(waitTime).then(() => {
       return [...POSTS];
     }),
