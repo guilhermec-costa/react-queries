@@ -7,6 +7,8 @@ import PostForm from "./components/PostForm";
 import useDogsData from "./queries/use-dogs-data";
 import useInfiniteDogScroll from "./queries/use-infinite-dog-scroll";
 import Dog from "./components/Dog";
+import { useQueryClient } from "@tanstack/react-query";
+import { getDogsPaginated } from "./api/json-server-client";
 
 function App() {
   const [currentPage, setCurrentPage] = React.useState<number>(1);
@@ -36,6 +38,14 @@ function App() {
   React.useEffect(() => {
     console.log(infiniteDogQuery.data?.pages.flatMap((page) => page.data));
   }, [infiniteDogQuery.data])
+
+  const queryClient = useQueryClient();
+  function prefetchOnHover() {
+    queryClient.prefetchQuery({
+      queryKey: ["dogs", currentPage],
+      queryFn: () => getDogsPaginated(currentPage)
+    });
+  }
 
   if (isLoading) return <OnLoading />;
   if (error) return <div>{JSON.stringify(error.message)}</div>;
@@ -116,6 +126,9 @@ function App() {
         infiniteDogQuery.data?.pages.flatMap((page) => page.data.map((dog) => <Dog dog={dog}/>))
       }
       <button onClick={handleNextScrollChunk}>Query Next chunk</button>
+      <div>
+        <button onMouseEnter={prefetchOnHover}>Prefetch button</button>
+      </div>
     </>
   );
 }

@@ -16,7 +16,7 @@ export function usePostData({ waitTime = 2000 }: UseSomeDataProps) {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     // placeholderData: keepPreviousData,
     queryFn: async ({queryKey}) => wait(waitTime).then(() => {
-      return [...POSTS];
+      return POSTS;
     }),
   });
 }
